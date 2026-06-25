@@ -7,7 +7,11 @@
 
 	
 	<div class="cathegories">
-		<h4 class="yur-main-title">Продукция для юридических лиц</h4>
+		<div class="yur-hero-copy">
+			<span class="yur-eyebrow">Каталог для B2B</span>
+			<h4 class="yur-main-title">Продукция для юридических лиц</h4>
+			<p class="yur-main-subtitle">Подберите биопрепараты по направлению применения, изучите карточки продуктов и перейдите к подробному описанию или расчету расхода.</p>
+		</div>
 		<!-- <div class="order-link-container">
 			<button class="order-link">Оформить заказ</button>
 		</div> -->
