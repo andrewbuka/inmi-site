@@ -989,4 +989,92 @@
 	<!--=================== S-CLIENTS ===================-->
 	
 	<!--================= S-CLIENTS END =================-->
+
+	<div class="yur-calc-overlay" data-yur-calc-close></div>
+	<aside class="yur-calc-panel" aria-hidden="true" aria-labelledby="yur-calc-title" role="dialog">
+		<div class="yur-calc-panel__header">
+			<div>
+				<p class="yur-calc-panel__eyebrow">Расчет расхода</p>
+				<h3 id="yur-calc-title" class="yur-calc-panel__title">Калькулятор расхода препарата</h3>
+			</div>
+			<button class="yur-calc-panel__close" type="button" aria-label="Закрыть калькулятор" data-yur-calc-close>&times;</button>
+		</div>
+		<div class="yur-calc-panel__body">
+			<p class="yur-calc-panel__lead">Заполните параметры применения — расчетный блок подготовлен для подключения формул расхода по выбранному препарату.</p>
+			<div class="yur-calc-fields" aria-label="Поля для расчета расхода препарата">
+				<label class="yur-calc-field">
+					<span>Объем обработки</span>
+					<input type="number" min="0" step="0.01" placeholder="Например, 120">
+				</label>
+				<label class="yur-calc-field">
+					<span>Единица измерения</span>
+					<select>
+						<option>тонн</option>
+						<option>м³</option>
+						<option>га</option>
+						<option>голов</option>
+					</select>
+				</label>
+				<label class="yur-calc-field yur-calc-field--wide">
+					<span>Комментарий к задаче</span>
+					<textarea rows="4" placeholder="Опишите условия применения препарата"></textarea>
+				</label>
+			</div>
+			<button class="btn btn-form yur-calc-panel__submit" type="button"><span>Рассчитать</span></button>
+		</div>
+	</aside>
+
+	<style>
+		.yur-calc-overlay{position:fixed;inset:0;background:rgba(18,39,31,.48);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s ease;z-index:998}.yur-calc-overlay.is-active{opacity:1;visibility:visible}.yur-calc-panel{position:fixed;top:0;right:0;width:min(460px,100%);height:100vh;background:linear-gradient(180deg,#fff 0%,#f7fbf8 100%);box-shadow:-24px 0 60px rgba(24,67,48,.22);transform:translateX(105%);transition:transform .34s ease;z-index:999;padding:34px 32px;overflow-y:auto;border-left:5px solid #246e49}.yur-calc-panel.is-active{transform:translateX(0)}.yur-calc-panel__header{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid rgba(36,110,73,.16)}.yur-calc-panel__eyebrow{margin:0 0 8px;color:#246e49;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.yur-calc-panel__title{margin:0;color:#173c2b;font-size:28px;line-height:1.18;font-weight:700}.yur-calc-panel__close{width:42px;height:42px;min-width:42px;border:1px solid rgba(36,110,73,.18);border-radius:50%;background:#fff;color:#246e49;font-size:30px;line-height:38px;cursor:pointer;transition:background .2s ease,color .2s ease,transform .2s ease}.yur-calc-panel__close:hover{background:#246e49;color:#fff;transform:rotate(90deg)}.yur-calc-panel__lead{margin:0 0 24px;color:#5d6d64;line-height:1.6}.yur-calc-fields{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:26px;padding:20px;background:#fff;border:1px solid rgba(36,110,73,.14);border-radius:18px;box-shadow:0 16px 34px rgba(36,110,73,.08)}.yur-calc-field{display:flex;flex-direction:column;gap:8px;margin:0;color:#173c2b;font-weight:600}.yur-calc-field--wide{grid-column:1/-1}.yur-calc-field input,.yur-calc-field select,.yur-calc-field textarea{width:100%;border:1px solid rgba(36,110,73,.22);border-radius:12px;background:#f8fbf9;color:#173c2b;padding:13px 14px;font:inherit;outline:none;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease}.yur-calc-field input:focus,.yur-calc-field select:focus,.yur-calc-field textarea:focus{border-color:#246e49;background:#fff;box-shadow:0 0 0 4px rgba(36,110,73,.12)}.yur-calc-panel__submit{width:100%;justify-content:center}.yur-calc-open{cursor:pointer}@media(max-width:575px){.yur-calc-panel{padding:26px 20px}.yur-calc-panel__title{font-size:23px}.yur-calc-fields{grid-template-columns:1fr;padding:16px}}
+	</style>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			var panel = document.querySelector('.yur-calc-panel');
+			var overlay = document.querySelector('.yur-calc-overlay');
+			var title = document.getElementById('yur-calc-title');
+			var closeElements = document.querySelectorAll('[data-yur-calc-close]');
+
+			if (!panel || !overlay || !title) {
+				return;
+			}
+
+			function openCalculator(productName) {
+				title.textContent = 'Калькулятор расхода препарата ' + productName;
+				panel.classList.add('is-active');
+				overlay.classList.add('is-active');
+				panel.setAttribute('aria-hidden', 'false');
+				document.body.style.overflow = 'hidden';
+			}
+
+			function closeCalculator() {
+				panel.classList.remove('is-active');
+				overlay.classList.remove('is-active');
+				panel.setAttribute('aria-hidden', 'true');
+				document.body.style.overflow = '';
+			}
+
+			document.querySelectorAll('.prod-yur-calc-box .btn').forEach(function (button) {
+				button.classList.add('yur-calc-open');
+				button.setAttribute('type', 'button');
+				button.addEventListener('click', function (event) {
+					event.preventDefault();
+					var card = button.closest('.prod-yur-item');
+					var productTitle = card ? card.querySelector('.prod-yur-descr-box h5') : null;
+					openCalculator(productTitle ? productTitle.textContent.trim() : '');
+				});
+			});
+
+			closeElements.forEach(function (element) {
+				element.addEventListener('click', closeCalculator);
+			});
+
+			document.addEventListener('keydown', function (event) {
+				if (event.key === 'Escape') {
+					closeCalculator();
+				}
+			});
+		});
+	</script>
+
 <?php get_footer(); ?>
