@@ -27,9 +27,46 @@
         
 
         <div id="content" class="checkout-page-content"> 
+            <div class="checkout-hero">
+                <div class="checkout-hero__content">
+                    <span class="checkout-hero__eyebrow">Безопасное оформление</span>
+                    <h2>Проверьте заказ и оставьте контакты</h2>
+                    <p>Мы уточним детали, подтвердим наличие товаров и подберём удобный способ получения.</p>
+                </div>
+                <ul class="checkout-hero__steps" aria-label="Этапы оформления заказа">
+                    <li><span>1</span>Корзина</li>
+                    <li><span>2</span>Доставка</li>
+                    <li><span>3</span>Подтверждение</li>
+                </ul>
+            </div>
+
+            <div class="checkout-benefits" aria-label="Преимущества заказа">
+                <div class="checkout-benefit">
+                    <span class="checkout-benefit__icon">✓</span>
+                    <div>
+                        <strong>Быстрая связь</strong>
+                        <p>Менеджер подтвердит заказ после отправки формы.</p>
+                    </div>
+                </div>
+                <div class="checkout-benefit">
+                    <span class="checkout-benefit__icon">₽</span>
+                    <div>
+                        <strong>Прозрачная сумма</strong>
+                        <p>Итоговая стоимость всегда видна перед оформлением.</p>
+                    </div>
+                </div>
+                <div class="checkout-benefit">
+                    <span class="checkout-benefit__icon">i</span>
+                    <div>
+                        <strong>Помощь с доставкой</strong>
+                        <p>Подскажем оптимальный вариант получения товара.</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="empty-basket">
-            КОРЗИНА ПУСТА
-        </div>   
+                КОРЗИНА ПУСТА
+            </div>   
    
             <div class="simple-content tttt none">        
                     <div id="simplecheckout_form_0">
